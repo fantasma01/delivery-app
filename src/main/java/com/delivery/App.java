@@ -15,10 +15,7 @@ public class App {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/api", new ApiHandler());
-
-        String webDir = System.getProperty("web.dir", "src/main/resources/web");
-        server.createContext("/", new StaticFileHandler(Paths.get(webDir).toAbsolutePath()));
-
+        server.createContext("/", new StaticFileHandler(Paths.get("src/main/resources/web").toAbsolutePath()));
         server.setExecutor(Executors.newFixedThreadPool(4));
         server.start();
         System.out.println("Server running at http://localhost:8080");

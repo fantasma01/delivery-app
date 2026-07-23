@@ -104,8 +104,13 @@ public class PackageDAO {
         p.setWeight(rs.getDouble("weight"));
         p.setAddress(rs.getString("address"));
         p.setStatus(rs.getString("status"));
-        p.setDriverId(rs.getObject("driver_id", Integer.class));
-        p.setCustomerId(rs.getObject("customer_id", Integer.class));
+
+        int did = rs.getInt("driver_id");
+        p.setDriverId(rs.wasNull() ? null : did);
+
+        int cid = rs.getInt("customer_id");
+        p.setCustomerId(rs.wasNull() ? null : cid);
+
         p.setCreatedAt(rs.getString("created_at"));
         p.setDeliveredAt(rs.getString("delivered_at"));
         return p;
