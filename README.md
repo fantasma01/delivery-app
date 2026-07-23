@@ -1,27 +1,42 @@
-# Delivery Management App
+# Delivery Management App v2.0
 
-A simple console app to track packages, drivers, and deliveries.
-Built with Java + SQLite.
+Web-based delivery management system built with **Java + SQLite + vanilla JS**.
+
+## Features
+
+- **Dashboard** — real-time stats (total, pending, in-transit, delivered)
+- **Package management** — add, assign to driver, mark delivered, search/filter
+- **Driver management** — add and list drivers
+- **Customer management** — add and list customers
+- **REST API** — full JSON backend ready to be consumed by any frontend
 
 ## How to run
 
 ```bash
 cd delivery-app
-./run.sh
+./mvnw compile exec:java
 ```
 
-## Features
+Then open http://localhost:8080
 
-- Add/list drivers
-- Add/list packages
-- Assign a driver to a package
-- Track status: PENDING → IN_TRANSIT → DELIVERED
-- Filter packages by status
+## API endpoints
 
-## What it teaches
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/stats | Dashboard statistics |
+| GET | /api/packages | List all packages |
+| GET | /api/packages?status=PENDING | Filter by status |
+| GET | /api/packages?search=term | Search packages |
+| POST | /api/packages | Add a package |
+| PUT | /api/packages/{id}/assign?driverId={id} | Assign driver |
+| PUT | /api/packages/{id}/deliver | Mark delivered |
+| GET | /api/drivers | List drivers |
+| POST | /api/drivers | Add a driver |
+| GET | /api/customers | List customers |
+| POST | /api/customers | Add a customer |
 
-- Java OOP (models, DAOs, services)
-- SQL (CRUD, joins, filtering)
-- Git workflow (init, add, commit, push)
-- Console app structure
-- Separation of concerns
+## Tech stack
+
+- **Backend:** Java 17, built-in HttpServer, SQLite
+- **Frontend:** Vanilla HTML/CSS/JS
+- **Build:** Maven wrapper (no installation needed)

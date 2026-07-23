@@ -1,8 +1,6 @@
 package com.delivery.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Database {
     private static final String URL = "jdbc:sqlite:delivery.db";
@@ -18,6 +16,15 @@ public class Database {
 
     public static void init() {
         try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
+            stmt.execute("PRAGMA foreign_keys = ON");
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS customers (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    phone TEXT NOT NULL,
+                    address TEXT NOT NULL
+                )
+            """);
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS drivers (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,7 +41,11 @@ public class Database {
                     address TEXT NOT NULL,
                     status TEXT NOT NULL DEFAULT 'PENDING',
                     driver_id INTEGER,
-                    FOREIGN KEY (driver_id) REFERENCES drivers(id)
+                    customer_id INTEGER,
+                    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                    delivered_at TEXT,
+                    FOREIGN KEY (driver_id) REFERENCES drivers(id),
+                    FOREIGN KEY (customer_id) REFERENCES customers(id)
                 )
             """);
         } catch (Exception e) {

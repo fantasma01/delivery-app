@@ -17,13 +17,9 @@ public class Driver {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setName(String n) { this.name = n; }
     public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public void setPhone(String p) { this.phone = p; }
     public String getLicensePlate() { return licensePlate; }
-    public void setLicensePlate(String licensePlate) { this.licensePlate = licensePlate; }
-
-    public String toString() {
-        return id + " | " + name + " | " + phone + " | " + licensePlate;
-    }
+    public void setLicensePlate(String l) { this.licensePlate = l; }
 }

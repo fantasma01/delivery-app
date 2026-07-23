@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delivery Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <header>
+        <h1>Delivery Management</h1>
+        <nav>
+            <button class="active" data-tab="dashboard">Dashboard</button>
+            <button data-tab="packages">Packages</button>
+            <button data-tab="drivers">Drivers</button>
+            <button data-tab="customers">Customers</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard" class="tab-content active">
+            <h2>Dashboard</h2>
+            <div class="stats" id="stats"></div>
+            <div class="card"><h3>Recent Packages</h3><div id="recent-packages"></div></div>
+        </section>
+
+        <section id="packages" class="tab-content">
+            <h2>Packages</h2>
+            <div class="toolbar">
+                <button onclick="showAddPackage()">+ Add Package</button>
+                <input type="text" id="search-input" placeholder="Search packages..." oninput="searchPackages()">
+                <select id="status-filter" onchange="loadPackages()">
+                    <option value="">All</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="IN_TRANSIT">In Transit</option>
+                    <option value="DELIVERED">Delivered</option>
+                </select>
+            </div>
+            <div id="package-list" class="data-list"></div>
+        </section>
+
+        <section id="drivers" class="tab-content">
+            <h2>Drivers</h2>
+            <button onclick="showAddDriver()">+ Add Driver</button>
+            <div id="driver-list" class="data-list"></div>
+        </section>
+
+        <section id="customers" class="tab-content">
+            <h2>Customers</h2>
+            <button onclick="showAddCustomer()">+ Add Customer</button>
+            <div id="customer-list" class="data-list"></div>
+        </section>
+    </main>
+</div>
+
+<div id="modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,3 +1,6 @@
 out/
 *.db
 *.jar
+target/
+delivery.db
+
